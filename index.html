@@ -327,8 +327,8 @@
             </p>
         </section>
         
-        <section class="section">
 
+        <section class="section">
                     <h2>Education</h2>
             <div class="education-item">
                 <div class="degree">B.S. Business Analytics & Information Technology</div>
@@ -422,7 +422,7 @@
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 100%"></div>
                         </div>
-                        <div class="progress-text">100% - Current setup: Kali Linux, Windows Server 2019, Metasploitable</div>
+                        <div class="progress-text">100% - Current setup: Kali Linux, Windows Server 2019, VMware Fusion</div>
                     </div>
                     <div class="key-insights">
                         <h4>Homelab Components:</h4>
@@ -431,14 +431,8 @@
                             <li>Windows Server 2019 - Active Directory practice environment</li>
                         </ul>
                     </div>
-                    <div class="blog-tags">
-                        <span class="blog-tag">Homelab</span>
-                        <span class="blog-tag">Kali Linux</span>
-                        <span class="blog-tag">VMware Fusion</span>
-                        <span class="blog-tag">Network Security</span>
-                        <span class="blog-tag">Penetration Testing</span>
-                    </div>
-                    <a href="https://docs.google.com/document/d/1o8evFA8TzPEIojNr0YeVuD4YMGij7g29r9N9Vr_dbX4/edit?usp=sharing" class="read-more">Read Full Post →</a>
+
+                    <a href="https://docs.google.com/document/d/1vBLe43g8pzPNdzWyW-_Uwj6ZaGJ_-W6ywgW0WroQ0Og/edit?usp=sharing" class="read-more">Read Full Post →</a>
                 </div>
                 <div class="blog-post">
                     <div class="blog-meta">
@@ -461,24 +455,109 @@
                     <div class="key-insights">
                         <h4>Learning Path:</h4>
                         <ul>
-                            <li>✅ Network+ fundamentals and TCP/IP stack</li>
-                            <li>🔄 Python security scripting and automation</li>
-                            <li>🔄 Linux system administration and command line</li>
-                            <li>📋 Incident response and digital forensics</li>
+                            <li>✅ Building Fundamentals on TryHackMe</li>
+                            <li>✅ Practicing theories on HackTheBox</li>
                             <li>📋 Security+ certification preparation</li>
                             <li>📋 Penetration testing methodology (PTES)</li>
                         </ul>
                     </div>
-                    <div class="blog-tags">
-                        <span class="blog-tag">Learning Path</span>
-                        <span class="blog-tag">Career Transition</span>
-                        <span class="blog-tag">Certifications</span>
-                        <span class="blog-tag">Professional Development</span>
-                    </div>
-                    <a href="https://docs.google.com/document/d/1SCqjxGQF4RdX9ejJ3AsYwEurNaSUYkL4Ofy5tfzSnZM/edit?usp=sharing" class="read-more">Read Full Post →</a>
+
+                    <a href="https://docs.google.com/document/d/1CF9ImtpHwTesInnPlKgRlDGjMZAUlc-0JhSB9SvzS6Y/edit?usp=sharing" class="read-more">Read Full Post →</a>
                 </div>
             </section>
+                    <section class="section">
+                            <h2>Data Analytics Code Showcase</h2>
+                            <p class="description">
+                                    Here are examples of my data analytics work, including commented R code for Bayesian hypothesis testing, likelihood calculations, and FDR analysis. These scripts demonstrate my ability to analyze biomedical data, perform model selection, and interpret statistical results.
+                            </p>
+                                        <details>
+                                                <summary style="font-size:1.1em;cursor:pointer;margin-bottom:10px;">View R Code Examples</summary>
+                                                <pre style="background:#f6f7f2;border-radius:10px;padding:20px;overflow-x:auto;font-size:1em;line-height:1.5;border:1px solid #b2c2a2;">
+                <span style="color:#22863a;font-weight:bold;"># bayes.calc.test: Bayesian hypothesis testing with p-value calculation</span>
+                bayes.calc.test &lt;- function(data,dfunc0,rfunc0,vpar0,dfuncA,vparA,p0){
+                    <span style="color:#6a737d;"># calc prior probabilities for the two hyp</span>
+                    prior1 &lt;- c(p0,1-p0)
+                    <span style="color:#6a737d;"># calc the likelihood of the data under null hyp</span>
+                    lik0 &lt;- lik.calc(data,dfunc0,vpar0)
+                    <span style="color:#6a737d;"># calc the likelihood of the data under the alt hyp</span>
+                    lik1 &lt;- lik.calc(data,dfuncA,vparA)
+                    <span style="color:#6a737d;"># calc the likelihood ratio</span>
+                    r1 &lt;- lik1/lik0
+                    <span style="color:#6a737d;"># calc the denominator of the Bayes formula</span>
+                    denom &lt;- p0*lik0 + (1-p0)*lik1
+                    <span style="color:#6a737d;"># calc the posterior</span>
+                    post1 &lt;- c((p0*lik0/denom),((1-p0)*lik1/denom))
+                    <span style="color:#6a737d;"># create counter for p-val calc</span>
+                    n1 &lt;- length(data)
+                    n0 &lt;- 0
+                    <span style="color:#6a737d;"># artificial test to calc p-val</span>
+                    for(i in 1:10000){
+                        dataz &lt;- rfunc0(n1,vpar0)
+                        llikz0 &lt;- lik.calc(dataz,dfunc0,vpar0)
+                        llikzA &lt;- lik.calc(dataz,dfuncA,vparA)
+                        rlik &lt;- llikzA/llikz0
+                        n0 &lt;- n0 + (rlik &gt; r1)
+                    }
+                    <span style="color:#6a737d;"># calc p-value</span>
+                    pval1 &lt;- n0/10000
+                    <span style="color:#6a737d;"># display list with the prior and posterior probabilities and p-val</span>
+                    list(prior=prior1,post=post1,pval=pval1)
+                }
 
+                <span style="color:#22863a;font-weight:bold;"># lik.calc: Calculate likelihood of data given parameters</span>
+                lik.calc &lt;- function(data,dfunc,parvec){
+                    <span style="color:#6a737d;"># calc the likelihood of the data given the parameters</span>
+                    exp(sum(log(dfunc(data,parvec))))
+                }
+
+                <span style="color:#22863a;font-weight:bold;"># fdr: False Discovery Rate analysis with plotting</span>
+                fdr &lt;- function(v1,Q, ind=F){
+                    <span style="color:#6a737d;"># order p-val in ascending order</span>
+                    o1 &lt;- order(v1)
+                    <span style="color:#6a737d;"># Sort p-val according to the order</span>
+                    pvec &lt;- v1[o1]
+                    <span style="color:#6a737d;"># set m as the n of tests</span>
+                    m &lt;- length(v1)
+                    <span style="color:#6a737d;"># set the Q line according to whether the tests are independent or not</span>
+                    qline &lt;- Q * c(1:m) / m
+                    <span style="color:#6a737d;"># if the tests are not independent, adjust the Q</span>
+                    if(!ind){
+                        c1 &lt;- sum(1/(c(1:m)))
+                        qline &lt;- Q * c(1:m) / (m * c1)
+                    }
+                    <span style="color:#6a737d;"># create a plot of the p-val and the Q line</span>
+                    plot(c(c(1:m),c(1:m)),c(qline,pvec),type="n",xlab="ordering",ylab="pvalue")
+                    lines(c(1:m),qline)
+                    points(c(1:m),pvec)
+                    <span style="color:#6a737d;"># calc the difference between the p-val and the Q line</span>
+                    dv &lt;- pvec - qline
+                    I22 &lt;- !is.na(dv)
+                    <span style="color:#6a737d;"># identify the p-vals that are below the Q line</span>
+                    I1 &lt;- (dv[I22] < 0)
+                    I0 &lt;- I1
+                    <span style="color:#6a737d;"># if more than half of the p-vals are below the Q line</span>
+                    if(sum(I0) > .5){
+                        <span style="color:#6a737d;"># calc the maximum p-val that is below the Q line</span>
+                        pmax &lt;- max(pvec[I22][I1])
+                        <span style="color:#6a737d;"># identify all p-val that are less than or equal to pmax</span>
+                        I2 &lt;- pvec[I22] <= pmax
+                        <span style="color:#6a737d;"># highlight these p-vals in the plot</span>
+                        points(c(1:m)[I2],pvec[I2],col="red")
+                        <span style="color:#6a737d;"># return the indices of the interesting p-vals and whether the tests are independent</span>
+                        out &lt;- list(interesting=o1[I22][I2], ind=ind)
+                    }
+                    else{
+                        <span style="color:#6a737d;"># if less than half of the p-vals are below the Q, calculate the quantiles of the beta distribution</span>
+                        vec &lt;- qbeta(c(.5,.95,.99,.999),1,length(v1)+1)
+                        <span style="color:#6a737d;"># return these quantiles</span>
+                        out &lt;- list(q.5=vec[1],q.95=vec[2],q.99=vec[3],q.999=vec[4])
+                    }
+                    <span style="color:#6a737d;"># Return the result</span>
+                    out
+                }
+                                                </pre>
+                                        </details>
+                    </section>
         <section class="section">
             <h2>Featured Projects & Certifications</h2>
             <div class="projects-grid">
